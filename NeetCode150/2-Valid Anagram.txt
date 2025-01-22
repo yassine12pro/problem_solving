@@ -1,0 +1,28 @@
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+
+        if (s.length() != t.length()) {
+            return false;
+        }
+
+        unordered_map<char, int> count;
+        
+        // Count frequency of each character in s
+        for (char c : s) {
+            count[c]++;
+        }
+        for (char c : t) {
+            count[c]--;
+            // If count becomes negative, it means t has more of the character than s
+            if (count[c] < 0) {
+                return false;
+            }
+        }
+
+        // If all counts are zero, the strings are anagrams
+        return true;
+
+        
+    }
+};
