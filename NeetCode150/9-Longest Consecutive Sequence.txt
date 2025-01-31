@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+    if (nums.empty()) {
+        return 0; // Edge case: empty vector
+    }
+
+    // Sort the vector
+    sort(nums.begin(), nums.end());
+
+    int maxStreak = 1; // To store the maximum streak found
+    int currentStreak = 1; // To store the current streak
+
+    // Iterate through the sorted vector
+    for (int i = 1; i < nums.size(); i++) {
+        // Skip duplicates
+        if (nums[i] == nums[i - 1]) {
+            continue;
+        }
+
+        // Check if the current number is consecutive
+        if (nums[i] - nums[i - 1] == 1) {
+            currentStreak++;
+        } else {
+            // Reset the current streak if the sequence is broken
+            currentStreak = 1;
+        }
+
+        // Update the maximum streak
+        if (currentStreak > maxStreak) {
+            maxStreak = currentStreak;
+        }
+    }
+
+    return maxStreak;
+}
+};

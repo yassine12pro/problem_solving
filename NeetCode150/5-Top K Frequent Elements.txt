@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+    // Étape 1 : Compter les fréquences
+    unordered_map<int, int> mymap;
+    for (int num : nums) {
+        mymap[num]++;
+    }
+
+    // Étape 2 : Transférer les éléments dans un vector
+    vector<pair<int, int>> freqVector(mymap.begin(), mymap.end());
+
+    // Étape 3 : Trier le vector en fonction des fréquences (ordre décroissant)
+    sort(freqVector.begin(), freqVector.end(), [](const pair<int, int>& a, const pair<int, int>& b) {
+        return a.second > b.second; // Tri par fréquence décroissante
+    });
+
+    // Étape 4 : Extraire les k éléments les plus fréquents
+    vector<int> result;
+    for (int i = 0; i < k; ++i) {
+        result.push_back(freqVector[i].first);
+    }
+
+    return result;
+}
+};

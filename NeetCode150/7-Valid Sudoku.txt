@@ -1,0 +1,39 @@
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        vector<set<char>> rows(9);
+        vector<set<char>> cols(9);
+        vector<set<char>> blocks(9);
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                char val = board[i][j];
+
+                if (val == '.') {
+                    continue;
+                }
+
+                // Check row
+                if (rows[i].find(val) != rows[i].end()) {
+                    return false;
+                }
+                rows[i].insert(val);
+
+                // Check column
+                if (cols[j].find(val) != cols[j].end()) {
+                    return false;
+                }
+                cols[j].insert(val);
+
+                // Check block
+                int blockIndex = (i / 3) * 3 + (j / 3);
+                if (blocks[blockIndex].find(val) != blocks[blockIndex].end()) {
+                    return false;
+                }
+                blocks[blockIndex].insert(val);
+            }
+        }
+
+        return true;
+    }
+};
